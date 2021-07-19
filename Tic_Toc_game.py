@@ -8,6 +8,9 @@ import numpy as np
 from IPython.display import clear_output
 
 def display_board(board):
+    """
+    Create a  3X 3 board  representation for the game to visualise the game as it it played.
+    """
     clear_output()  # Remember, this only works in jupyter!
     
     print('   |   |')
@@ -24,6 +27,9 @@ def display_board(board):
     
 
 def player_input():
+    """
+    Define the players makers. The function takes input from players and assign their marker as 'X' or 'O'.
+    """
     marker = ''
     
     while not (marker == 'X' or marker == 'O'):
@@ -37,10 +43,16 @@ def player_input():
     
     
 def place_marker(board, marker, position):
+    """
+    Draw the board marker
+    """
     board[position] = marker
     
-def win_check(board,mark):
     
+def win_check(board,mark):
+    """
+    Assign the position of the markers of each player in the board and determine if one player won. 
+    """
     return ((board[7] == mark and board[8] == mark and board[9] == mark) or # across the top
     (board[4] == mark and board[5] == mark and board[6] == mark) or # across the middle
     (board[1] == mark and board[2] == mark and board[3] == mark) or # across the bottom
@@ -52,17 +64,25 @@ def win_check(board,mark):
 
 
 def choose_first():
+    """ 
+    Determine which player will start to play first
+    """
     if random.randint(0, 1) == 0:
         return 'Player 2'
     else:
         return 'Player 1'
     
 def space_check(board, position):
-    
+    """
+    Check at any stage of the game if the space is free.
+    """
     return board[position] == ' '
 
 
 def full_board_check(board):
+    """ 
+    Check how the board look like at any time of the play
+    """
     for i in range(1,10):
         if space_check(board, i):
             return False
@@ -70,6 +90,9 @@ def full_board_check(board):
 
 
 def player_choice(board):
+    """
+    The player choose where to place its marker in the board
+    """
     position = 0
     
     while position not in [1,2,3,4,5,6,7,8,9] or not space_check(board, position):
@@ -78,8 +101,12 @@ def player_choice(board):
     return position
 
 def replay():
+    """
+    Ask at the end of the game if the players want to continue playing the game
+    """
     
     return input('Do you want to play again? Enter Yes or No: ').lower().startswith('y')
+
 
 
 
